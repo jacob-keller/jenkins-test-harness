@@ -21,6 +21,8 @@ import org.jvnet.hudson.test.recipes.WithPlugin;
 import org.jvnet.hudson.test.recipes.WithPluginManager;
 import org.xml.sax.SAXException;
 
+import org.jenkinsci.main.modules.sshd.SSHD;
+
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import jenkins.model.JenkinsLocationConfiguration;
 
@@ -54,6 +56,13 @@ public class UseRecipesWithJenkinsRuleTest {
         wc.assertFails("loginError", SC_UNAUTHORIZED);
         // but not once the user logs in.
         verifyNotError(wc.login("alice"));
+    }
+
+    @Test
+    @PresetData(DataSet.NO_SSHD_SERVER)
+    public void testNoSSHDServer() throws Exception {
+        // Verify that the SSHD port is set to the disabled value
+        assertEquals(-1, SSHD.get().getPort());
     }
 
     @Test

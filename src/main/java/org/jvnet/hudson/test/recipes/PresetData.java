@@ -67,6 +67,11 @@ public @interface PresetData {
         ANONYMOUS_READONLY,
 
         SECURED_ACEGI,
+
+        /**
+         * Disable and do not start the SSHD server.
+         */
+        NO_SSHD_SERVER,
     }
 
     class RunnerImpl extends Recipe.Runner<PresetData> {
